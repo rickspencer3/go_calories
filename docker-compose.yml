@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+  mariadb:
+    image: bitnami/mariadb:10.1.14-r0
+    environment:
+      - MARIADB_USER=my_user
+      - MARIADB_DATABASE=calories
+      - MARIADB_PASSWORD=my_password
+
+  myapp:
+    image: revel
+    environment:
+      - DB_HOST=mariadb
+      - DB_USERNAME=my_user
+      - DB_DATABASE=calories
+      - DB_PASSWORD=my_password
+      - GITHUB_USER=rickspencer3
+      - APP_NAME=calories
+    depends_on:
+      - mariadb
+    ports:
+      - 9000:9000
+    volumes:
+      - ./app:/app
