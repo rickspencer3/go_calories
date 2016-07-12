@@ -35,7 +35,7 @@ func (c Foods) List() revel.Result {
 		fmt.Println(description)
     fs = append(fs, models.Food{id,description})
   }
-  //defer rows.Close()
+  defer rows.Close()
 	defer db.Close()
 
 	return c.RenderJson(fs)
